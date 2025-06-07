@@ -1,0 +1,12 @@
+0.7
+2020.2
+Oct 13 2023
+20:47:58
+C:/cnn_verilog/baseline/baseline.sim/sim_1/behav/xsim/glbl.v,1697210495,verilog,,,,glbl,,,,,,,,
+C:/cnn_verilog/verilog/chip.v,1723436800,verilog,,C:/cnn_verilog/verilog/comparator.v,,chip,,,,,,,,
+C:/cnn_verilog/verilog/comparator.v,1723436830,verilog,,C:/cnn_verilog/verilog/conv1.v,,comparator,,,,,,,,
+C:/cnn_verilog/verilog/conv1.v,1723436830,verilog,,C:/cnn_verilog/verilog/conv2.v,,conv1_buf;conv1_calc;conv1_layer,,,,,,,,
+C:/cnn_verilog/verilog/conv2.v,1723436831,verilog,,C:/cnn_verilog/verilog/fc.v,,conv2_buf;conv2_calc;conv2_layer,,,,,,,,
+C:/cnn_verilog/verilog/fc.v,1723436831,verilog,,C:/cnn_verilog/verilog/maxpool_relu.v,,fully_connected,,,,,,,,
+C:/cnn_verilog/verilog/maxpool_relu.v,1723436831,verilog,,C:/cnn_verilog/verilog/top_tb.v,,maxpool_relu,,,,,,,,
+C:/cnn_verilog/verilog/top_tb.v,1723437489,verilog,,,,top_tb;top_tb_1000,,,,,,,,

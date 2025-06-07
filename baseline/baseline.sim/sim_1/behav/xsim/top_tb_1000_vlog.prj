@@ -1,0 +1,15 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../../verilog/chip.v" \
+"../../../../../verilog/comparator.v" \
+"../../../../../verilog/conv1.v" \
+"../../../../../verilog/conv2.v" \
+"../../../../../verilog/fc.v" \
+"../../../../../verilog/maxpool_relu.v" \
+"../../../../../verilog/top_tb.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
