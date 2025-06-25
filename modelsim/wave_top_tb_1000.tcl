@@ -1,4 +1,4 @@
-vlog verilog/*.v
+vlog ../verilog/*.v
 
 vsim work.top_tb_1000
 delete wave *
