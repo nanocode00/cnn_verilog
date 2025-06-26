@@ -1,7 +1,8 @@
-vlog ../verilog/*.v
+transcript file result.log
+
+vlog ../*.v top_tb_1000.v
 
 vsim work.top_tb_1000
-delete wave *
 
 add wave -format logic     -radix binary      top_tb_1000/clk
 add wave -format logic     -radix binary      top_tb_1000/rst_n
@@ -14,4 +15,4 @@ add wave -format literal   -radix unsigned    top_tb_1000/accuracy
 add wave -format literal   -radix unsigned    top_tb_1000/decision
 add wave -format literal   -radix binary      top_tb_1000/valid_out_6
 
-run 100ns
+run -all

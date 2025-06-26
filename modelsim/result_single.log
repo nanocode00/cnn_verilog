@@ -1,0 +1,81 @@
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:57:22 on Jun 26,2025
+# vlog -reportprogress 300 ../chip.v ../comparator.v ../conv1_layer.v ../conv2_layer.v ../fully_connected.v ../maxpool_relu_1.v ../maxpool_relu_2.v top_tb.v 
+# -- Compiling module chip
+# -- Compiling module comparator
+# -- Compiling module conv1_layer
+# -- Compiling module conv1_buf
+# -- Compiling module conv1_calc
+# -- Compiling module conv2_layer
+# -- Compiling module conv2_buf
+# -- Compiling module conv2_calc
+# -- Compiling module fully_connected
+# -- Compiling module maxpool_relu_1
+# -- Compiling module maxpool_relu_2
+# -- Compiling module top_tb
+# 
+# Top level modules:
+# 	top_tb
+# End time: 22:57:22 on Jun 26,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# End time: 22:57:23 on Jun 26,2025, Elapsed time: 0:04:36
+# Errors: 0, Warnings: 0
+# vsim work.top_tb 
+# Start time: 22:57:23 on Jun 26,2025
+# Loading work.top_tb
+# Loading work.chip
+# Loading work.conv1_layer
+# Loading work.conv1_buf
+# Loading work.conv1_calc
+# Loading work.maxpool_relu_1
+# Loading work.conv2_layer
+# Loading work.conv2_buf
+# Loading work.conv2_calc
+# Loading work.maxpool_relu_2
+# Loading work.fully_connected
+# Loading work.comparator
+# ** Note: $finish    : top_tb.v(116)
+#    Time: 13350 ps  Iteration: 0  Instance: /top_tb
+# 1
+# Break in Module top_tb at top_tb.v line 116
+do wave_top_tb.tcl
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:58:21 on Jun 26,2025
+# vlog -reportprogress 300 ../chip.v ../comparator.v ../conv1_layer.v ../conv2_layer.v ../fully_connected.v ../maxpool_relu_1.v ../maxpool_relu_2.v top_tb.v 
+# -- Compiling module chip
+# -- Compiling module comparator
+# -- Compiling module conv1_layer
+# -- Compiling module conv1_buf
+# -- Compiling module conv1_calc
+# -- Compiling module conv2_layer
+# -- Compiling module conv2_buf
+# -- Compiling module conv2_calc
+# -- Compiling module fully_connected
+# -- Compiling module maxpool_relu_1
+# -- Compiling module maxpool_relu_2
+# -- Compiling module top_tb
+# 
+# Top level modules:
+# 	top_tb
+# End time: 22:58:21 on Jun 26,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# End time: 22:58:31 on Jun 26,2025, Elapsed time: 0:01:08
+# Errors: 0, Warnings: 0
+# vsim work.top_tb 
+# Start time: 22:58:31 on Jun 26,2025
+# Loading work.top_tb
+# Loading work.chip
+# Loading work.conv1_layer
+# Loading work.conv1_buf
+# Loading work.conv1_calc
+# Loading work.maxpool_relu_1
+# Loading work.conv2_layer
+# Loading work.conv2_buf
+# Loading work.conv2_calc
+# Loading work.maxpool_relu_2
+# Loading work.fully_connected
+# Loading work.comparator
+# ** Note: $finish    : top_tb.v(116)
+#    Time: 13350 ps  Iteration: 0  Instance: /top_tb
+# 1
+# Break in Module top_tb at top_tb.v line 116
