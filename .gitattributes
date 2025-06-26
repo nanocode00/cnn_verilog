@@ -1,2 +1,0 @@
-synth/chip_synth.v filter=lfs diff=lfs merge=lfs -text
-modelsim_synth/work/_lib1_12.qpg filter=lfs diff=lfs merge=lfs -text
