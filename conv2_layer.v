@@ -84,7 +84,7 @@ module conv2_layer(
     assign valid_out_buf = valid_out1_buf & valid_out2_buf & valid_out3_buf;
     assign valid_out_conv2 = valid_out_calc_1 & valid_out_calc_2 & valid_out_calc_3;
 
-    reg signed [7:0] bias [0:CHANNEL_LEN - 1];
+    wire signed [7:0] bias [0:CHANNEL_LEN - 1];
     wire signed [11:0] exp_bias [0:CHANNEL_LEN - 1];
 
     conv2_buf conv2_buf_1(
@@ -444,12 +444,12 @@ module conv2_layer(
         .w_3(w_233)
     );
 
-    integer i;
-    always @(*) begin
-        for (i=0;i<=2;i=i+1) begin
-            bias[i]=b_2[(8*i)+:8];
+    genvar i;
+    generate
+        for (i = 0; i <= 2; i = i + 1) begin
+            assign bias[i] = b_2[(8 * i)+:8];
         end
-    end
+    endgenerate
     assign exp_bias[0] = (bias[0][7] == 1) ? {4'b1111, bias[0]} : {4'b0000, bias[0]};
     assign exp_bias[1] = (bias[1][7] == 1) ? {4'b1111, bias[1]} : {4'b0000, bias[1]};
     assign exp_bias[2] = (bias[2][7] == 1) ? {4'b1111, bias[2]} : {4'b0000, bias[2]};
@@ -777,18 +777,18 @@ module conv2_calc(
 
     wire signed [19:0] calc_out, calc_out_1, calc_out_2, calc_out_3;
 
-    reg signed [7:0] weight_1 [0:24];
-    reg signed [7:0] weight_2 [0:24];
-    reg signed [7:0] weight_3 [0:24];
+    wire signed [7:0] weight_1 [0:24];
+    wire signed [7:0] weight_2 [0:24];
+    wire signed [7:0] weight_3 [0:24];
 
-    integer i;
-    always @(*) begin
+    generate
+        genvar i;
         for (i = 0; i <= 24; i = i + 1) begin
-            weight_1[i] = w_1[(8 * i)+:8];
-            weight_2[i] = w_2[(8 * i)+:8];
-            weight_3[i] = w_3[(8 * i)+:8];
+            assign weight_1[i] = w_1[(8 * i)+:8];
+            assign weight_2[i] = w_2[(8 * i)+:8];
+            assign weight_3[i] = w_3[(8 * i)+:8];
         end
-    end
+    endgenerate
 
     assign calc_out_1 = data_out1_0 * weight_1[0] + data_out1_1 * weight_1[1] + data_out1_2 * weight_1[2] + data_out1_3 * weight_1[3] + data_out1_4 * weight_1[4] +
                         data_out1_5 * weight_1[5] + data_out1_6 * weight_1[6] + data_out1_7 * weight_1[7] + data_out1_8 * weight_1[8] + data_out1_9 * weight_1[9] +

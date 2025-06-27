@@ -414,22 +414,22 @@ module conv1_calc(
     wire signed [DATA_BITS:0] exp_data [0:FILTER_SIZE * FILTER_SIZE - 1];
     wire signed [11:0] exp_bias [0:CHANNEL_LEN - 1];
 
-    reg signed [DATA_BITS - 1:0] weight_1 [0:FILTER_SIZE * FILTER_SIZE - 1];
-    reg signed [DATA_BITS - 1:0] weight_2 [0:FILTER_SIZE * FILTER_SIZE - 1];
-    reg signed [DATA_BITS - 1:0] weight_3 [0:FILTER_SIZE * FILTER_SIZE - 1];
-    reg signed [DATA_BITS - 1:0] bias [0:CHANNEL_LEN - 1];
+    wire signed [DATA_BITS - 1:0] weight_1 [0:FILTER_SIZE * FILTER_SIZE - 1];
+    wire signed [DATA_BITS - 1:0] weight_2 [0:FILTER_SIZE * FILTER_SIZE - 1];
+    wire signed [DATA_BITS - 1:0] weight_3 [0:FILTER_SIZE * FILTER_SIZE - 1];
+    wire signed [DATA_BITS - 1:0] bias [0:CHANNEL_LEN - 1];
 
-    integer i;
-    always @(*) begin
+    generate
+        genvar i;
         for (i = 0; i <= 24; i = i + 1) begin
-            weight_1[i] = w_11[(8 * i)+:8];
-            weight_2[i] = w_12[(8 * i)+:8];
-            weight_3[i] = w_13[(8 * i)+:8];
+            assign weight_1[i] = w_11[(8 * i)+:8];
+            assign weight_2[i] = w_12[(8 * i)+:8];
+            assign weight_3[i] = w_13[(8 * i)+:8];
         end
         for (i = 0; i <= 2; i = i + 1) begin
-            bias[i] = b_1[(8 * i)+:8];
+            assign bias[i] = b_1[(8 * i)+:8];
         end
-    end
+    endgenerate
 
     // Unsigned -> Signed
     assign exp_data[0] = {1'd0, data_out_0};

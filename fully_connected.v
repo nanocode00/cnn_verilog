@@ -35,20 +35,20 @@ module fully_connected (
     reg [INPUT_WIDTH - 1:0] buf_idx;
     reg [3:0] out_idx;
     reg signed [13:0] buffer [0:INPUT_NUM - 1];
-    reg signed [DATA_BITS - 1:0] weight [0:INPUT_NUM * OUTPUT_NUM - 1];
-    reg signed [DATA_BITS - 1:0] bias [0:OUTPUT_NUM - 1];
+    wire signed [DATA_BITS - 1:0] weight [0:INPUT_NUM * OUTPUT_NUM - 1];
+    wire signed [DATA_BITS - 1:0] bias [0:OUTPUT_NUM - 1];
 
     wire signed [19:0] calc_out;
     wire signed [13:0] data1, data2, data3;
-    integer i;
-    always @(*) begin
+    generate
+        genvar i;
         for (i = 0; i <= 479; i = i + 1) begin
-            weight[i] = w_fc[(8 * i)+:8];
+            assign weight[i] = w_fc[(8 * i)+:8];
         end
         for (i = 0; i <= 9; i = i + 1) begin
-            bias[i] = b_fc[(8 * i)+:8];
+            assign bias[i] = b_fc[(8 * i)+:8];
         end
-    end
+    endgenerate
 
 
     assign data1 = (data_in_1[11] == 1) ? {2'b11, data_in_1} : {2'b00, data_in_1};
