@@ -1,7 +1,8 @@
-vlog ../synth/std_cell/*.v ../synth/chip_synth.v ../synth/tb_synth.v
+transcript file result.log
+
+vlog std_cell/*.v chip_synth.v tb_synth.v
 
 vsim work.top_tb_1000
-delete wave *
 
 add wave -format logic     -radix binary      top_tb_1000/clk
 add wave -format logic     -radix binary      top_tb_1000/rst_n

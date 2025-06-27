@@ -13,11 +13,10 @@
 /*-------------------------------------------------------------------
  *  Module: top_tb_2
  *------------------------------------------------------------------*/
+
 `timescale 1ps/1ps
 
-
 module top_tb_1000();
-
     reg clk, rst_n;
     reg [7:0] pixels [0:783999];
     reg [9:0] img_idx;
@@ -30,7 +29,6 @@ module top_tb_1000();
     integer i_cnt;  // loop variable
     reg [9:0] accuracy; // hit/miss count (1000)
 
-
     wire [3:0] decision;
     wire valid_out_6;
 
@@ -39,6 +37,7 @@ module top_tb_1000();
     reg signed [7:0] weight_12 [0:24];
     reg signed [7:0] weight_13 [0:24];
     reg signed [7:0] bias_1 [0:2];
+
     //conv2
     reg signed [7:0] bias_2 [0:2];
     reg signed [7:0] weight_211 [0:24];
@@ -52,11 +51,10 @@ module top_tb_1000();
     reg signed [7:0] weight_231 [0:24];
     reg signed [7:0] weight_232 [0:24];
     reg signed [7:0] weight_233 [0:24];
-    //fullyconnected
 
+    //fullyconnected
     reg signed [7:0] weight_fc [0:479];
     reg signed [7:0] bias_fc [0:9];
-
 
     wire signed [0:199] w_11;
     wire signed [0:199] w_12;
@@ -74,10 +72,9 @@ module top_tb_1000();
     wire signed [0:199] w_233;
     wire signed [0:3839] w_fc;
     wire signed [0:79] b_fc;
+
     // Clock generation
     always #5 clk = ~clk;
-
-    // Read image text file
 
     initial begin
         //conv1
@@ -100,52 +97,65 @@ module top_tb_1000();
         $readmemh("../data/fc_weight.txt", weight_fc);
         $readmemh("../data/fc_bias.txt", bias_fc);
     end
-    
 
-    chip_synth chip1 (
-        clk, rst_n, valid_out_6,
-        b_1, b_2, b_fc,
-        data_in, decision,
-        w_11, w_12, w_13,
-        w_211, w_212, w_213,
-        w_221, w_222, w_223,
-        w_231, w_232, w_233,
-        w_fc
+    chip_synth chip1(
+        .clk(clk),
+        .rst_n(rst_n),
+        .data_in(data_in),
+        .decision(decision),
+        .valid_out_6(valid_out_6),
+        //conv1
+        .w_11(w_11),
+        .w_12(w_12),
+        .w_13(w_13),
+        .b_1(b_1),
+        //conv2
+        .b_2(b_2),
+        .w_211(w_211),
+        .w_212(w_212),
+        .w_213(w_213),
+        .w_221(w_221),
+        .w_222(w_222),
+        .w_223(w_223),
+        .w_231(w_231),
+        .w_232(w_232),
+        .w_233(w_233),
+        //fullyconnected
+        .w_fc(w_fc),
+        .b_fc(b_fc)
     );
 
     genvar i;
     generate
-        for(i=0;i<=24;i=i+1) begin
-            assign w_11[(8*i)+:8]=weight_11[i];
-            assign w_12[(8*i)+:8]=weight_12[i];
-            assign w_13[(8*i)+:8]=weight_13[i];
-            assign w_211[(8*i)+:8]=weight_211[i];
-            assign w_212[(8*i)+:8]=weight_212[i];
-            assign w_213[(8*i)+:8]=weight_213[i];
-            assign w_221[(8*i)+:8]=weight_221[i];
-            assign w_222[(8*i)+:8]=weight_222[i];
-            assign w_223[(8*i)+:8]=weight_223[i];
-            assign w_231[(8*i)+:8]=weight_231[i];
-            assign w_232[(8*i)+:8]=weight_232[i];
-            assign w_233[(8*i)+:8]=weight_233[i];            
+        for (i = 0; i <= 24; i = i + 1) begin
+            assign w_11[(8 * i)+:8] = weight_11[i];
+            assign w_12[(8 * i)+:8] = weight_12[i];
+            assign w_13[(8 * i)+:8] = weight_13[i];
+            assign w_211[(8 * i)+:8] = weight_211[i];
+            assign w_212[(8 * i)+:8] = weight_212[i];
+            assign w_213[(8 * i)+:8] = weight_213[i];
+            assign w_221[(8 * i)+:8] = weight_221[i];
+            assign w_222[(8 * i)+:8] = weight_222[i];
+            assign w_223[(8 * i)+:8] = weight_223[i];
+            assign w_231[(8 * i)+:8] = weight_231[i];
+            assign w_232[(8 * i)+:8] = weight_232[i];
+            assign w_233[(8 * i)+:8] = weight_233[i];            
         end
-        for(i=0;i<=2;i=i+1) begin
-            assign b_1[(8*i)+:8]=bias_1[i];
-            assign b_2[(8*i)+:8]=bias_2[i];          
+        for (i = 0; i <= 2; i = i + 1) begin
+            assign b_1[(8 * i)+:8] = bias_1[i];
+            assign b_2[(8 * i)+:8] = bias_2[i];          
         end
-        for(i=0;i<=479;i=i+1) begin
-            assign w_fc[(8*i)+:8]=weight_fc[i];    
+        for (i = 0; i <= 479; i = i + 1) begin
+            assign w_fc[(8 * i)+:8] = weight_fc[i];    
         end
-        for(i=0;i<=9;i=i+1) begin
-            assign b_fc[(8*i)+:8]=bias_fc[i];          
+        for (i = 0; i <= 9; i = i + 1) begin
+            assign b_fc[(8 * i)+:8] = bias_fc[i];          
         end
     endgenerate
 
-
-
     // Read image text file
     initial begin
-        $readmemh("../data/input_1000.txt", pixels);
+        $readmemh("C:/cnn_verilog/data/input_1000.txt", pixels);
         cnt <= 0;
         img_idx <= 0;
         clk <= 1'b0;
@@ -153,7 +163,6 @@ module top_tb_1000();
         rst_n <= 1'b1;
         rand_num <= 1'b0;
         accuracy <= 0;
-        data_in <= 8'h00;
 
         #3 rst_n <= 1'b0;
         
@@ -201,13 +210,13 @@ module top_tb_1000();
                 state <= 1'b0;
                 rst_n <= 1'b0;
                 input_cnt <= input_cnt + 1'b1;
-                rand_num <= $urandom_range(0, 1000);
-                //rand_num <= rand_num + 1'b1;
+                // rand_num <= $urandom_range(0, 1000);
+                rand_num <= rand_num + 1'b1;
             end
 
             if (state == 1'b0) begin
-                //data_in <= pixels[cnt*784 + img_idx];
-                data_in <= pixels[rand_num*784 + img_idx];
+                //data_in <= pixels[cnt * 784 + img_idx];
+                data_in <= pixels[rand_num * 784 + img_idx];
                 //data_in <= pixel[img_idx];
                 img_idx <= img_idx + 1'b1;
 
@@ -219,6 +228,7 @@ module top_tb_1000();
                         $display("Accuracy : %3d%%", accuracy/10);
                         $stop;
                     end
+                    
                     img_idx <= 0;
                     state <= 1'b1;  // done
                 end
